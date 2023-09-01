@@ -20,7 +20,7 @@ The MERNTube backend API powers the MERNTube application, a full-stack Video & A
 
 Please visit here to see the frontend code: [MERNTube - Frontend](https://github.com/hsyntes/merntube)
 
-[![MERNTube](https://merntube.s3.us-east-2.amazonaws.com/merntube-desktop-dark.png)](https://merntube.vercel.app)
+[![MERNTube](https://merntube.s3.us-east-2.amazonaws.com/merntube-desktop-dark-new.png)](https://merntube.vercel.app)
 
 ## WebSocket
 
