@@ -1,0 +1,38 @@
+{
+  "name": "merntube-api",
+  "version": "1.0.0",
+  "description": "A Full Stack API that allows you to download youtube videos and musics",
+  "main": "server.js",
+  "scripts": {
+    "start": "npx nodemon server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "youtube",
+    "downloader",
+    "video",
+    "music",
+    "mern",
+    "mongodb",
+    "express",
+    "react",
+    "nodejs"
+  ],
+  "author": "sehsyntes",
+  "license": "ISC",
+  "dependencies": {
+    "compression": "^1.7.4",
+    "cors": "^2.8.5",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "express-mongo-sanitize": "^2.2.0",
+    "express-rate-limit": "^6.9.0",
+    "helmet": "^7.0.0",
+    "hpp": "^0.2.3",
+    "mongoose": "^7.4.5",
+    "nodemon": "^3.0.1",
+    "ws": "^8.13.0",
+    "xss-clean": "^0.1.4",
+    "ytdl-core": "^4.11.5"
+  }
+}
