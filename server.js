@@ -1,7 +1,7 @@
 const dotenv = require("dotenv");
 const mongoose = require("mongoose");
 const app = require("./app");
-// const http = require("http");
+const http = require("http");
 const WebSocket = require("ws");
 const { downloadVideo } = require("./controllers/sourceController");
 
@@ -21,9 +21,9 @@ dotenv.config({ path: "./config.env" });
   }
 })();
 
-// const server = http.createServer(app);
+const server = http.createServer(app);
 
-const server = app.listen(process.env.PORT, () =>
+server.listen(process.env.PORT, () =>
   console.log(`Server is running on PORT: ${process.env.PORT}`)
 );
 
