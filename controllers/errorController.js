@@ -1,5 +1,6 @@
 const ErrorProvider = require("../classes/ErrorProvider");
 
+// ! 403: Forbidden
 const validationError = (err) => {
   const messages = err.message.split(",");
 

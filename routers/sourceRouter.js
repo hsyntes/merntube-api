@@ -3,6 +3,7 @@ const { getVideo } = require("../controllers/sourceController");
 
 const router = express.Router();
 
-router.get("/download/:sourceId", getVideo);
+// * Routers
+router.get("/download/:sourceId", getVideo); // Downloading the file
 
 module.exports = router;

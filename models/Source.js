@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 
+// * Schema design
 const sourceSchema = new mongoose.Schema(
   {
     url: {

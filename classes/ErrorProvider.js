@@ -1,3 +1,4 @@
+// * Class that inherits JS Error class for custom error messages
 module.exports = class ErrorProvider extends Error {
   constructor(statusCode, status, message) {
     super(message);
