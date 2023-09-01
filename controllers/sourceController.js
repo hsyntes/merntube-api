@@ -8,7 +8,11 @@ exports.downloadVideo = (type, videoURL, title, connection) => {
   const fileExtension = type === "Video" ? "mp4" : "mp3";
 
   const fileName = `merntube - ${title}.${fileExtension}`;
-  const sourceDir = path.join(process.cwd(), "downloads", fileName);
+  const downloadsDir = path.join(process.cwd(), "downloads");
+
+  if (!fs.existsSync(downloadsDir)) fs.mkdirSync(downloadsDir);
+
+  const sourceDir = path.join(downloadsDir, fileName);
 
   const videoStream = ytdl(videoURL, {
     quality: "highest",
