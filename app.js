@@ -13,7 +13,7 @@ const errorController = require("./controllers/errorController");
 const app = express();
 
 // * Allowed origins
-const origins = ["https://merntube.vercel.app"];
+const origins = ["http://localhost:3000", "https://merntube.vercel.app"];
 
 app.use(
   cors({
