@@ -56,7 +56,7 @@ exports.downloadVideo = (type, videoURL, title, connection) => {
     });
   } catch (e) {
     console.error("File system error: ", e);
-    next(e); // Eğer 'next' fonksiyonunu kullanıyorsanız, burada bir hata olabilir. Bu, middleware bağlamına göre değişebilir.
+    next(e);
   }
 };
 
@@ -72,7 +72,6 @@ exports.getVideo = async (req, res, next) => {
 
   const source = await Source.findById(sourceId);
 
-  // Dosya yolu düzeltiliyor, /downloads/ ekleniyor
   const filePath = path.join(__dirname, "../tmp/", source.path);
 
   res.download(filePath);
