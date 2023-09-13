@@ -12,7 +12,9 @@ const validationError = (err) => {
   return new ErrorProvider(403, "fail", message);
 };
 
-module.exports = (req, res, next) => {
+module.exports = (err, req, res, next) => {
+  console.error(err);
+
   if (process.env.NODE_ENV === "production") {
     if (err.name === "ValidationError") err = validationError(err);
   }
