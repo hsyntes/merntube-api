@@ -73,7 +73,7 @@ exports.getVideo = async (req, res, next) => {
   const source = await Source.findById(sourceId);
 
   // Dosya yolu düzeltiliyor, /downloads/ ekleniyor
-  const filePath = path.join(__dirname, "../downloads/", source.path);
+  const filePath = path.join(__dirname, "../tmp/", source.path);
 
   res.download(filePath);
 };
