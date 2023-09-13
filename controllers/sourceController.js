@@ -9,7 +9,7 @@ exports.downloadVideo = (type, videoURL, title, connection) => {
   const fileExtension = type === "Video" ? "mp4" : "mp3";
 
   const fileName = `merntube - ${title}.${fileExtension}`;
-  const downloadsDir = path.join(__dirname, "../../downloads");
+  const downloadsDir = path.join("/tmp", "downloads");
 
   try {
     // * Create the source path to download if it doesn't exist.
@@ -39,7 +39,7 @@ exports.downloadVideo = (type, videoURL, title, connection) => {
       // * Create MongoDB document
       const source = await Source.create({
         url: videoURL,
-        path: `downloads/${fileName}`,
+        path: `/tmp/downloads/${fileName}`,
       });
 
       // * Send to the completed process with WebSocet
