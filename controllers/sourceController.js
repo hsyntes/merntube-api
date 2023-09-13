@@ -72,7 +72,7 @@ exports.getVideo = async (req, res, next) => {
 
   const source = await Source.findById(sourceId);
 
-  const filePath = path.join(__dirname, "../downloads/", source.path);
+  const filePath = path.join(__dirname, "..", source.path);
 
   res.download(filePath);
 };
