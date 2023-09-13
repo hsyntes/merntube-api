@@ -42,7 +42,7 @@ server.listen(process.env.PORT, () =>
 
       connection.on("message", (message) => {
         const { type, videoURL, title } = JSON.parse(message);
-        console.log(activeTab, videoURL, localized.title);
+        console.log(type, videoURL, title, connection);
         downloadVideo(type, videoURL, title, connection);
       });
     });
