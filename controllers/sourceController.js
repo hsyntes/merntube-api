@@ -4,20 +4,22 @@ const fs = require("fs");
 const path = require("path");
 const Source = require("../models/Source");
 
-// * Downlading & Converting the YouTube sorce
+// * Downloading & Converting the YouTube source
 exports.downloadVideo = (type, videoURL, title, connection) => {
   const fileExtension = type === "Video" ? "mp4" : "mp3";
 
   const fileName = `merntube - ${title}.${fileExtension}`;
-  const downloadsDir = path.join("/tmp", "downloads");
+  const downloadsDir = path.join(__dirname, "../downloads");
 
   try {
     // * Create the source path to download if it doesn't exist.
-    if (!fs.existsSync(downloadsDir)) fs.mkdirSync(downloadsDir);
+    if (!fs.existsSync(downloadsDir)) {
+      fs.mkdirSync(downloadsDir, { recursive: true });
+    }
 
     const sourceDir = path.join(downloadsDir, fileName);
 
-    // * Configuration the YouTube source
+    // * Configuration for the YouTube source
     const videoStream = ytdl(videoURL, {
       quality: "highest",
       filter: fileExtension === "mp4" ? "videoandaudio" : "audioonly",
@@ -27,22 +29,22 @@ exports.downloadVideo = (type, videoURL, title, connection) => {
 
     videoStream.on("progress", (chunkLength, downloaded, total) => {
       const progress = (downloaded / total) * 100;
-      // * Send to the progress with WebSocket
+      // * Send progress to the WebSocket
       connection.send(JSON.stringify({ progress }));
     });
 
     // * Transfer data from one source to another
     videoStream.pipe(fileStream);
 
-    // * When transfer is ended
+    // * When transfer is completed
     videoStream.on("end", async () => {
-      // * Create MongoDB document
+      // * Create a MongoDB document
       const source = await Source.create({
         url: videoURL,
-        path: `/tmp/downloads/${fileName}`,
+        path: `downloads/${fileName}`,
       });
 
-      // * Send to the completed process with WebSocet
+      // * Send the completion status to WebSocket
       await connection.send(
         JSON.stringify({
           status: "success",
@@ -54,20 +56,24 @@ exports.downloadVideo = (type, videoURL, title, connection) => {
     });
   } catch (e) {
     console.error("File system error: ", e);
-    next(e);
+    next(e); // Eğer 'next' fonksiyonunu kullanıyorsanız, burada bir hata olabilir. Bu, middleware bağlamına göre değişebilir.
   }
 };
 
-// * Downloding video for client
+// * Downloading video for the client
 exports.getVideo = async (req, res, next) => {
-  if (!req.params.sourceId)
+  if (!req.params.sourceId) {
     return next(
       new ErrorProvider(403, "fail", "Please specify a valid video source.")
     );
+  }
 
   const { sourceId } = req.params;
 
   const source = await Source.findById(sourceId);
 
-  res.download(path.join(__dirname, "..", source.path));
+  // Dosya yolu düzeltiliyor, /downloads/ ekleniyor
+  const filePath = path.join(__dirname, "../downloads/", source.path);
+
+  res.download(filePath);
 };
