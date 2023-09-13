@@ -30,7 +30,7 @@ app.use(compression());
 
 // * API limit requests
 const limit = expressRateLimit({
-  max: 10,
+  max: 100,
   windowsMs: 60 * 60 * 1000,
   message: "Too many requests.",
   standartHeaders: true,
