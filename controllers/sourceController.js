@@ -8,7 +8,11 @@ const Source = require("../models/Source");
 exports.downloadVideo = (type, videoURL, title, connection) => {
   const fileExtension = type === "Video" ? "mp4" : "mp3";
 
-  const fileName = `merntube - ${title}.${fileExtension}`;
+  const fileName = `merntube - ${title.replace(
+    /[^a-zA-Z0-9_.-]/g,
+    ""
+  )}.${fileExtension}`;
+
   const downloadsDir = path.join(__dirname, "../downloads");
 
   try {
